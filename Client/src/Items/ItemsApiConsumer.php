@@ -14,14 +14,10 @@ class ItemsApiConsumer implements ItemsApiConsumerInterface
     private $apiUrl;
     const METHOD = 'api/items';
 
-    public function __construct(HttpClientInterface $client)
+    public function __construct(HttpClientInterface $client, string $apiUrl)
     {
         $this->client = $client;
-    }
-
-    public function setApiUrl($url) : void
-    {
-        $this->apiUrl = $url;
+        $this->apiUrl = $apiUrl;
     }
 
     public function getItem(int $itemId) : ItemDTO
@@ -40,7 +36,12 @@ class ItemsApiConsumer implements ItemsApiConsumerInterface
     {
         $response = $this->client->request(
             'GET',
-            $this->apiUrl . self::METHOD
+            $this->apiUrl . self::METHOD . '?page=1',
+            [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ]
+            ]
         );
 
         $this->checkStatusCode($response->getStatusCode());
@@ -75,7 +76,7 @@ class ItemsApiConsumer implements ItemsApiConsumerInterface
     private function checkStatusCode($statusCode) : void
     {
         if($statusCode != 200) {
-            throw new HttpException('Error response from Items APi');
+            throw new HttpException($statusCode);
         }
     }
 }

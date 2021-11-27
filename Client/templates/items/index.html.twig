@@ -21,6 +21,12 @@
 		<h1>Hello
 			{{ controller_name }}! ✅</h1>
 
+		{% for message in app.flashes('error') %}
+			<div class="flash-error">
+				{{ message }}
+			</div>
+		{% endfor %}
+
 		<ul>
 			{% for item in items %}
 				<li>{{ item.name }}</li>
