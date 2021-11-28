@@ -1,0 +1,28 @@
+<form method="GET">
+	<button type="submit" name="listType" value="getProductListInStock">Items in stock</button>
+	<button type="submit" name="listType" value="getProductListOutOfStock">Items out of stock</button>
+	<button type="submit" name="listType" value="getProductListInStockAboveFive">Items in stock above five</button>
+</form>
+
+<form method="POST">
+	<table class="table">
+		<tr>
+			<th>id</th>
+			<th>name</th>
+			<th>amount</th>
+			<th>delete</th>
+		</tr>
+		{% for item in items %}
+			<tr>
+				<td>{{ item.id }}</td>
+				<td>{{ item.name }}</td>
+				<td>{{ item.amount }}</td>
+				<td>
+					<a href="items/delete?id={{ item.id }}" name="delete">delete</a>
+                    <a href="items/edit?id={{ item.id }}" name="edit">edit</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+    <a href="items/add"name="add">add</a>
+</form>

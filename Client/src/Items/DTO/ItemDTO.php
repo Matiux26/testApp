@@ -3,11 +3,11 @@ namespace App\Items\DTO;
 
 final class ItemDTO
 {
-    private $id;
-    private $name;
-    private $amount;
+    protected $id;
+    protected $name;
+    protected $amount;
 
-    public function __construct(int $id, string $name, float $amount)
+    public function __construct(int $id = null, string $name = null, float $amount = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -19,13 +19,28 @@ final class ItemDTO
         return $this->id;
     }
 
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
     public function getName(): string
     {
         return $this->name;
     }
 
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
     public function getAmount(): float
     {
         return $this->amount;
+    }
+
+    public function setAmount($amount): void
+    {
+        $this->amount = $amount;
     }
 }

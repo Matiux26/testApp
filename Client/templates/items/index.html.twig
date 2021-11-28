@@ -26,11 +26,6 @@
 				{{ message }}
 			</div>
 		{% endfor %}
-
-		<ul>
-			{% for item in items %}
-				<li>{{ item.name }}</li>
-			{% endfor %}
-		</ul>
+	{% include 'items/items.html.twig' %}
 	</div>
 {% endblock %}

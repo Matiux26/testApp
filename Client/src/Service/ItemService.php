@@ -2,8 +2,8 @@
 
 namespace App\Service;
 
+use App\Items\DTO\ItemDTO;
 use App\Items\ItemsApiConsumerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ItemService
 {
@@ -37,5 +37,25 @@ class ItemService
         return array_filter($itemList, function ($item) {
             return $item->getAmount() > 5;
         });
+    }
+
+    public function deleteItem($id): void
+    {
+        $this->api->deleteItem($id);
+    }
+
+    public function addItem(ItemDTO $item): void
+    {
+        $this->api->addItem($item);
+    }
+
+    public function getItem(int $id): ItemDTO
+    {
+        return $this->api->getItem($id);
+    }
+
+    public function editItem(ItemDTO $item): void
+    {
+        $this->api->editItem($item);
     }
 }
